@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MightyOwl Shorts – TikTok</title>
+<style>
+  :root { --fg: #1a1a1a; --bg: #fff; --box: #f1f1f1; --accent: #1a73e8; }
+  @media (prefers-color-scheme: dark) { :root { --fg: #e8e8e8; --bg: #121212; --box: #242424; --accent: #8ab4f8; } }
+  body { font-family: system-ui, sans-serif; max-width: 640px; margin: 40px auto; padding: 0 16px; line-height: 1.6; color: var(--fg); background: var(--bg); }
+  #code { font-family: ui-monospace, monospace; background: var(--box); padding: 12px; border-radius: 8px; word-break: break-all; }
+  button { margin-top: 12px; padding: 8px 16px; font-size: 1rem; border: 0; border-radius: 8px; background: var(--accent); color: #fff; cursor: pointer; }
+</style>
+</head>
+<body>
+<h1>TikTok connected</h1>
+<p id="uitleg">Copy this code and paste it into the terminal on the laptop:</p>
+<div id="code">(no code found)</div>
+<button id="kopieer">Copy code</button>
+<script>
+  const p = new URLSearchParams(location.search);
+  const code = p.get("code");
+  if (code) {
+    document.getElementById("code").textContent = code;
+  } else if (p.get("error")) {
+    document.getElementById("uitleg").textContent = "TikTok returned an error:";
+    document.getElementById("code").textContent = p.get("error") + ": " + (p.get("error_description") || "");
+  }
+  document.getElementById("kopieer").onclick = () => navigator.clipboard.writeText(code || "");
+</script>
+</body>
+</html>
